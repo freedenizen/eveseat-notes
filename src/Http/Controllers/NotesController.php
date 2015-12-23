@@ -23,8 +23,11 @@ namespace Seat\Notes\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Seat\Notes\Models\Notes;
 use Seat\Web\Validation\Permission;
 use Seat\Notes\Repositories\Notes\NotesRepository;
+use Seat\Notes\Validation\UpdateNote;
+use Seat\Notes\Validation\AddNote;
 
 /**
  * Class NotesController
@@ -32,16 +35,68 @@ use Seat\Notes\Repositories\Notes\NotesRepository;
  */
 class NotesController extends Controller
 {
+    use NotesRepository;
     /**
-     * @param $character_id
+     * @param $ref_id
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function getNotes($ref_id)
     {
 
-        $notes = $this->getNotes($ref_id);
+        $notes = $this->getAllNotes($ref_id);
 
-        return view('web::character.notes', compact('notes'));
+        return view('notes::list', compact('notes','ref_id'));
+    }
+
+    public function getEditNote($character_id, $note_id)
+    {
+        $private = "";
+        $note = Notes::findorFail($note_id);
+        if ($note->private){
+            $private = "checked";
+        }
+
+        return view('notes::edit', compact('note','private'));
+    }
+
+    public function getCreateNote($character_id)
+    {
+        return view('notes::create', compact('character_id'));
+    }
+
+    public function postUpdateNote(UpdateNote $request)
+    {
+
+        $user = auth()->user();
+
+        $note = Notes::find($request->input('note_id'));
+
+        $note->title  = $request->input('title');
+        $note->details = $request->input('details');
+        $note->private = $request->input('private');
+        $note->updated_by = $user->id;
+
+        $note->save();
+
+        return redirect()->back()
+            ->with('success', trans('notes::seat.note_updated'));
+    }
+
+    public function postAddNote(AddNote $request)
+    {
+        $user = auth()->user();
+        $note = new Notes;
+
+        $note->ref_id     = $request->input('ref_id');
+        $note->title      = $request->input('title');
+        $note->details    = $request->input('details');
+        $note->private    = $request->input('private');
+        $note->updated_by = $user->id;
+
+        $note->save();
+
+        return redirect()->back()
+            ->with('success', trans('notes::seat.note_added'));
     }
 }

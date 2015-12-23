@@ -1,8 +1,8 @@
 <?php
 /*
-This file is part of SeAT
+This file is part of a SeAT Add-on
 
-Copyright (C) 2015  Leon Jacobs
+Copyright (C) 2015 Asher Schaffer
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ use Seat\Web\Acl\Clipboard;
 use Seat\Web\Exceptions\BouncerException;
 
 /**
- * Class CorporationBouncer
+ * Class NotesBouncer
  * @package Seat\Notes\Http\Middleware
  */
 class NotesBouncer

@@ -1,8 +1,8 @@
 <?php
 /*
-This file is part of SeAT
+This file is part of a SeAT Add-on
 
-Copyright (C) 2015  Asher Schaffer
+Copyright (C) 2015 Asher Schaffer
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -19,27 +19,30 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-namespace Seat\Notes\Models;
+namespace Seat\Notes\Validation;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Http\Requests\Request;
 
 /**
- * Class AssetList
- * @package Seat\Notes\Models
+ * Class AddNote
+ * @package Seat\Notes\Validation
  */
-class Notes extends Model
+class AddNote extends Request
 {
 
     /**
-     * @var string
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
      */
-    protected $table = 'notes';
+    public function rules()
+    {
 
-    /**
-     * @var array
-     */
-    protected $fillable = [
-        'updated_by', 'private', 'ref_id', 'details', 'title'
-    ];
-
+        return [
+            'ref_id'  => 'required',
+            'title'   => 'required',
+            'details' => 'required',
+            'private' => 'boolean',
+        ];
+    }
 }

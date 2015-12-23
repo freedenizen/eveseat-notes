@@ -24,8 +24,29 @@ Route::group([
 ], function () {
 
     Route::get('/view/notes/{character_id}', [
-        'as'         => 'character.view.notes',
+        'as'         => 'notes.list',
         'middleware' => 'notesbouncer:view',
         'uses'       => 'NotesController@getNotes'
+    ]);
+
+    Route::get('/view/notes/{character_id}/edit/{note_id}', [
+        'as'         => 'notes.edit',
+        'middleware' => 'notesbouncer:view',
+        'uses'       => 'NotesController@getEditNote'
+    ]);
+
+    Route::get('/view/notes/{character_id}/create', [
+        'as'   => 'notes.create',
+        'uses' => 'NotesController@getCreateNote'
+    ]);
+
+    Route::post('/notes/update', [
+        'as'   => 'notes.update',
+        'uses' => 'NotesController@postUpdateNote'
+    ]);
+
+    Route::post('/notes/add', [
+        'as'   => 'notes.add',
+        'uses' => 'NotesController@postAddNote'
     ]);
 });

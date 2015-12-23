@@ -1,8 +1,8 @@
 <?php
 /*
-This file is part of SeAT
+This file is part of a SeAT Add-on
 
-Copyright (C) 2015  Leon Jacobs
+Copyright (C) 2015 Asher Schaffer
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -44,17 +44,26 @@ trait NotesRepository
      *
      * @return mixed
      */
-    public function getNotes($ref_id)
+    public function getAllNotes($ref_id)
     {
         $user = auth()->user();
 
-        $public_notes = Notes::where('ref_id',$ref_id)->where('private',false);
+        $public_notes = Notes::where('ref_id',$ref_id)
+            ->leftJoin('users','notes.updated_by','=','users.id')
+            ->where('private',false)
+            ->select('notes.*','users.name');
 
         // Get Private Notes
         if(!$user->hasSuperUser()) {
-            $private_notes = Notes::where('ref_id', $ref_id)->where('private', true)->where('created_by', $user->id);
+            $private_notes = Notes::where('ref_id', $ref_id)
+                ->leftJoin('users','notes.updated_by','=','users.id')
+                ->where('private', true)->where('created_by', $user->id)
+                ->select('notes.*','users.name');
         }else{
-            $private_notes = Notes::where('ref_id', $ref_id)->where('private', true);
+            $private_notes = Notes::where('ref_id', $ref_id)
+                ->leftJoin('users','notes.updated_by','=','users.id')
+                ->where('private', true)
+                ->select('notes.*','users.name');
         }
 
         return $public_notes->union($private_notes)->get();

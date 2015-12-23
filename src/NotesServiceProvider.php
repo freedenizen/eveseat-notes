@@ -4,7 +4,7 @@ namespace Seat\Notes;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
-use Seat\Trawler\Http\Middleware\TrawlerBouncer;
+use Seat\Notes\Http\Middleware\NotesBouncer;
 
 /**
  * Class NotesServiceProvider
@@ -23,7 +23,7 @@ class NotesServiceProvider extends ServiceProvider
         $this->add_middleware($router);
         $this->add_views();
         $this->add_publications();
-        //$this->add_translations();
+        $this->add_translations();
     }
 
     /**
@@ -36,6 +36,12 @@ class NotesServiceProvider extends ServiceProvider
         // Merge the config with anything in the main app
         $this->mergeConfigFrom(
             __DIR__ . '/Config/notes.config.php', 'notes.config'); //TODO: Notes Config
+    }
+
+    public function add_translations()
+    {
+
+        $this->loadTranslationsFrom(__DIR__ . '/lang', 'notes');
     }
 
     /**

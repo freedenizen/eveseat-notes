@@ -2,7 +2,7 @@
 /*
 This file is part of SeAT
 
-Copyright (C) 2015  Asher Schaffer
+Copyright (C) 2015  Leon Jacobs
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -19,27 +19,15 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-namespace Seat\Notes\Models;
+return [
 
-use Illuminate\Database\Eloquent\Model;
-
-/**
- * Class AssetList
- * @package Seat\Notes\Models
- */
-class Notes extends Model
-{
-
-    /**
-     * @var string
-     */
-    protected $table = 'notes';
-
-    /**
-     * @var array
-     */
-    protected $fillable = [
-        'updated_by', 'private', 'ref_id', 'details', 'title'
-    ];
-
-}
+    // Notes
+    'note'                          => 'Note|Notes',
+    'private'                       => 'Private',
+    'save'                          => 'Save',
+    'updated_by'                    => 'Updated By',
+    'edit_note'                     => 'Edit Note',
+    'add_new_note'                  => 'Add New Note',
+    'note_added'                    => 'Note Added',
+    'note_updated'                  => 'Note Updated',
+];
