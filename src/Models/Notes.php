@@ -22,6 +22,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 namespace Seat\Notes\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class AssetList
@@ -29,7 +30,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Notes extends Model
 {
-
+    use SoftDeletes;
     /**
      * @var string
      */
@@ -39,7 +40,8 @@ class Notes extends Model
      * @var array
      */
     protected $fillable = [
-        'updated_by', 'private', 'ref_id', 'details', 'title'
+        'updated_by', 'private', 'character_id', 'details', 'title'
     ];
 
+    protected $dates = ['deleted_at'];
 }

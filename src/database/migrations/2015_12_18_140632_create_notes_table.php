@@ -19,13 +19,14 @@ class CreateNotesTable extends Migration
             $table->increments('id');
 
             $table->integer('updated_by');
-            $table->integer('ref_id');
+            $table->integer('character_id');
             $table->boolean('private');
             $table->text('title');
             $table->text('details');
 
-            $table->index(['ref_id', 'updated_by']);
+            $table->index(['character_id', 'updated_by']);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

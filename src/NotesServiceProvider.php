@@ -36,6 +36,9 @@ class NotesServiceProvider extends ServiceProvider
         // Merge the config with anything in the main app
         $this->mergeConfigFrom(
             __DIR__ . '/Config/notes.config.php', 'notes.config'); //TODO: Notes Config
+
+        $this->mergeConfigFrom(
+            __DIR__ . '/Config/notes.permissions.php', 'web.permissions');
     }
 
     public function add_translations()

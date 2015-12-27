@@ -28,6 +28,7 @@ use Seat\Web\Validation\Permission;
 use Seat\Notes\Repositories\Notes\NotesRepository;
 use Seat\Notes\Validation\UpdateNote;
 use Seat\Notes\Validation\AddNote;
+use Seat\Web\Acl\Clipboard;
 
 /**
  * Class NotesController
@@ -35,27 +36,29 @@ use Seat\Notes\Validation\AddNote;
  */
 class NotesController extends Controller
 {
-    use NotesRepository;
+    use NotesRepository, Clipboard;
     /**
-     * @param $ref_id
+     * @param $character_id
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getNotes($ref_id)
+    public function getNotes($character_id)
     {
+        $can_edit = auth()->user()->has('notes.edit');
+        $can_create = auth()->user()->has('notes.create');
 
-        $notes = $this->getAllNotes($ref_id);
+        $notes = $this->getAllNotes($character_id);
 
-        return view('notes::list', compact('notes','ref_id'));
+        return view('notes::list', compact('notes','character_id','can_edit','can_create'));
     }
 
     public function getEditNote($character_id, $note_id)
     {
         $private = "";
         $note = Notes::findorFail($note_id);
-        if ($note->private){
+        if ($note->private)
             $private = "checked";
-        }
+
 
         return view('notes::edit', compact('note','private'));
     }
@@ -63,6 +66,14 @@ class NotesController extends Controller
     public function getCreateNote($character_id)
     {
         return view('notes::create', compact('character_id'));
+    }
+
+    public function getDeleteNote($character_id, $note_id)
+    {
+        $this->getNote($note_id)->delete();
+
+        return redirect()->back()
+            ->with('success', trans('notes::note_deleted'));
     }
 
     public function postUpdateNote(UpdateNote $request)
@@ -85,14 +96,19 @@ class NotesController extends Controller
 
     public function postAddNote(AddNote $request)
     {
+        $private = 0;
+        if( $request->input('private') )
+            $private = 1;
+
         $user = auth()->user();
         $note = new Notes;
 
-        $note->ref_id     = $request->input('ref_id');
-        $note->title      = $request->input('title');
-        $note->details    = $request->input('details');
-        $note->private    = $request->input('private');
-        $note->updated_by = $user->id;
+
+        $note->character_id = $request->input('character_id');
+        $note->title       = $request->input('title');
+        $note->details     = $request->input('details');
+        $note->private     = $private;
+        $note->updated_by  = $user->id;
 
         $note->save();
 

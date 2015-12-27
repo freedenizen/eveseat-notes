@@ -40,27 +40,27 @@ trait NotesRepository
     /**
      * Get the notes about a specific reference
      *
-     * @param $ref_id
+     * @param $character_id
      *
      * @return mixed
      */
-    public function getAllNotes($ref_id)
+    public function getAllNotes($character_id)
     {
         $user = auth()->user();
 
-        $public_notes = Notes::where('ref_id',$ref_id)
+        $public_notes = Notes::where('character_id',$character_id)
             ->leftJoin('users','notes.updated_by','=','users.id')
             ->where('private',false)
             ->select('notes.*','users.name');
 
         // Get Private Notes
         if(!$user->hasSuperUser()) {
-            $private_notes = Notes::where('ref_id', $ref_id)
+            $private_notes = Notes::where('character_id', $character_id)
                 ->leftJoin('users','notes.updated_by','=','users.id')
-                ->where('private', true)->where('created_by', $user->id)
+                ->where('private', true)->where('updated_by', $user->id)
                 ->select('notes.*','users.name');
         }else{
-            $private_notes = Notes::where('ref_id', $ref_id)
+            $private_notes = Notes::where('character_id', $character_id)
                 ->leftJoin('users','notes.updated_by','=','users.id')
                 ->where('private', true)
                 ->select('notes.*','users.name');
@@ -68,5 +68,16 @@ trait NotesRepository
 
         return $public_notes->union($private_notes)->get();
 
+    }
+
+    /**
+     * @param $note_id
+     *
+     * @return mixed
+     */
+    public function getNote($note_id)
+    {
+
+        return Notes::findOrFail($note_id);
     }
 }

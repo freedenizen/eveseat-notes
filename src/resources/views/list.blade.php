@@ -11,8 +11,10 @@
         <div class="panel-heading">
             <h3 class="panel-title">
                 {{trans_choice('notes::seat.note',2)}}
-                <a href="{{ route('notes.create', ['characterID' => $ref_id]) }}"
-                   class="btn btn-xs btn-success pull-right"><i class="fa fa-plus" style="color:white"></i></a>
+                @if($can_create)
+                    <a href="{{ route('notes.create', ['characterID' => $character_id]) }}"
+                    class="btn btn-xs btn-success pull-right"><i class="fa fa-plus" style="color:white"></i></a>
+                @endif
             </h3>
         </div>
         <div class="panel-body">
@@ -46,8 +48,15 @@
                           </span>
                         </td>
 
-                        <td><a href="{{ route('notes.edit', ['characterID' => $note->ref_id,'note' => $note->id ]) }}"
-                               class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> {{ trans('web::seat.edit') }}</a></td>
+                        <td>
+                            @if($can_edit)
+                                <a href="{{ route('notes.edit', ['characterID' => $note->character_id,'note' => $note->id ]) }}"
+                                   class="btn btn-xs btn-primary">
+                                    <i class="fa fa-pencil"></i>
+                                    {{ trans('web::seat.edit') }}
+                                </a>
+                            @endif
+                        </td>
                     </tr>
 
                 @endforeach

@@ -31,22 +31,31 @@ Route::group([
 
     Route::get('/view/notes/{character_id}/edit/{note_id}', [
         'as'         => 'notes.edit',
-        'middleware' => 'notesbouncer:view',
+        'middleware' => 'notesbouncer:edit',
         'uses'       => 'NotesController@getEditNote'
     ]);
 
     Route::get('/view/notes/{character_id}/create', [
-        'as'   => 'notes.create',
-        'uses' => 'NotesController@getCreateNote'
+        'as'         => 'notes.create',
+        'middleware' => 'notesbouncer:create',
+        'uses'       => 'NotesController@getCreateNote'
+    ]);
+
+    Route::get('/notes/delete/{character_id}/delete/{note_id}', [
+        'as'         => 'notes.delete',
+        'middleware' => 'notesbouncer:delete',
+        'uses'       => 'NotesController@getDeleteNote'
     ]);
 
     Route::post('/notes/update', [
-        'as'   => 'notes.update',
-        'uses' => 'NotesController@postUpdateNote'
+        'as'         => 'notes.update',
+        'middleware' => 'notesbouncer:edit',
+        'uses'       => 'NotesController@postUpdateNote'
     ]);
 
     Route::post('/notes/add', [
-        'as'   => 'notes.add',
-        'uses' => 'NotesController@postAddNote'
+        'as'         => 'notes.add',
+        'middleware' => 'notesbouncer:create',
+        'uses'       => 'NotesController@postAddNote'
     ]);
 });

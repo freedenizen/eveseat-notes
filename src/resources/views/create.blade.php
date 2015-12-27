@@ -21,7 +21,7 @@
                             {!! img('character', $character_id, 64, ['class' => 'img-circle eve-icon small-icon']) !!}
                             <span rel="id-to-name">{{ $character_id }}</span>
                         </a>
-                        <input type="hidden" name="ref_id" value="{{ $character_id }}">
+                        <input type="hidden" name="character_id" value="{{ $character_id }}">
                     </div>
 
                     <div class="form-group">
@@ -35,12 +35,8 @@
                     </div>
 
                     <div class="form-group">
-                        <div class="input-group">
-                          <span class="input-group-addon">
-                              <input type="checkbox" name="private" value="1">
-                          </span>
-                            <input id="prependedcheckbox" name="privatetext" class="form-control" type="text" placeholder="{{ trans('notes::seat.private') }}">
-                        </div>
+                        <label for="Private">{{ trans('notes::seat.private') }}</label>
+                        <input type="checkbox" name="private" value="1">
                     </div>
 
                 </div><!-- /.box-body -->

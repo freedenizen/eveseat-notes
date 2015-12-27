@@ -27,12 +27,8 @@
                     </div>
 
                     <div class="form-group">
-                        <div class="input-group">
-                          <span class="input-group-addon">
-                              <input type="checkbox" name="private" value="1" {{ $private }}>
-                          </span>
-                            <input id="prependedcheckbox" name="privatetext" class="form-control" type="text" placeholder="{{ trans('notes::seat.private') }}">
-                        </div>
+                        <label for="Private">{{ trans('notes::seat.private') }}</label>
+                        <input type="checkbox" name="private" value="1" {{ $private }}>
                     </div>
 
                 </div><!-- /.box-body -->

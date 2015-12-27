@@ -39,7 +39,7 @@ class AddNote extends Request
     {
 
         return [
-            'ref_id'  => 'required',
+            'character_id'  => 'required',
             'title'   => 'required',
             'details' => 'required',
             'private' => 'boolean',

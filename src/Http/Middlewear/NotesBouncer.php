@@ -39,7 +39,7 @@ class NotesBouncer
      * Handle an incoming request.
      *
      * This filter checks if a specific permission exists as
-     * well as ensures that an affiliation to a corporation
+     * well as ensures that an affiliation to a character
      * exists.
      *
      * @param  \Illuminate\Http\Request $request
@@ -55,6 +55,13 @@ class NotesBouncer
 
         // Get the currently logged in user
         $user = auth()->user();
+
+        if (!$request->character_id)
+            throw new BouncerException(
+                'NotesBouncer was unable to determine a character_id');
+
+        // Set the request charID
+        $user->setCharacterId($request->character_id);
 
         // Check on the clipboard if this permission
         // should be granted.

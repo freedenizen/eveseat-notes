@@ -41,6 +41,7 @@ class UpdateNote extends Request
         return [
             'title'   => 'required',
             'details' => 'required',
+            'private' => 'boolean',
         ];
     }
 }
