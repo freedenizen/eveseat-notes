@@ -9,7 +9,7 @@
   "require": {
     "eveseat/api": "1.*",
     "eveseat/services": "1.*",
-    "eveseat/web": "1.*",
+    "eveseat/web": "dev-master",
     "laravel/framework": "5.1.*",
     "php": ">=5.5.9"
   },
