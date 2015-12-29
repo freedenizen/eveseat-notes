@@ -39,7 +39,7 @@
                             @endif
                         </td>
                         <td>{{ $note->title }}</td>
-                        <td>{{ str_limit($note->details, 50, '...') }}</td>
+                        <td data-search="{{ $note->details }}">{{ str_limit($note->details, 50, '...') }}</td>
 
                         <td>{{ $note->name }}</td>
                         <td data-order="{{ $note->updated_at }}">
