@@ -1,8 +1,8 @@
 <?php
 /*
-This file is part of SeAT
+This file is part of a SeAT addon
 
-Copyright (C) 2015  Leon Jacobs
+Copyright (C) 2015  Asher Schaffer 
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
