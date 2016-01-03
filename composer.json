@@ -1,5 +1,5 @@
 {
-  "name": "freedenizen/eveseat-notes",
+  "name": "pandemiclegion/eveseat-notes",
   "description": "Note System for Seat 1.x",
   "autoload": {
     "psr-4": {
