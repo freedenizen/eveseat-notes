@@ -39,6 +39,9 @@ class NotesServiceProvider extends ServiceProvider
 
         $this->mergeConfigFrom(
             __DIR__ . '/Config/notes.permissions.php', 'web.permissions');
+
+        $this->mergeConfigFrom(
+            __DIR__ . '/Config/package.character.menu.php', 'package.character.menu');
     }
 
     public function add_translations()
