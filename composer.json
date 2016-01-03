@@ -1,5 +1,5 @@
 {
-  "name": "pandemiclegion/eveseat-notes",
+  "name": "freedenizen/eveseat-notes",
   "description": "Note System for Seat 1.x",
   "autoload": {
     "psr-4": {
@@ -7,9 +7,7 @@
     }
   },
   "require": {
-    "eveseat/api": "1.*",
-    "eveseat/services": "1.*",
-    "eveseat/web": "dev-master",
+    "eveseat/web": "~1.0",
     "laravel/framework": "5.1.*",
     "php": ">=5.5.9"
   },
