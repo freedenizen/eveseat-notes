@@ -1,0 +1,21 @@
+{
+  "name": "freedenizen/eveseat-notes",
+  "description": "Note System for Seat 1.x",
+  "autoload": {
+    "psr-4": {
+      "Seat\\Notes\\": "src/"
+    }
+  },
+  "require": {
+    "eveseat/web": "~1.0",
+    "laravel/framework": "5.1.*",
+    "php": ">=5.5.9"
+  },
+  "license": "GPL-2.0",
+  "authors": [
+    {
+      "name": "Free Denizen",
+      "email": "freedenizen@gmail.com"
+    }
+  ]
+}
