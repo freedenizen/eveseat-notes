@@ -8,6 +8,6 @@ This repository contains a note add-on for [SeAT](https://github.com/eveseat/sea
 In your seat installation directory e.g. /var/www/seat: 
 * Run: `composer require freedenizen/eveseat-notes`
 * Modify `config/app.php`
-** After `Seat\Web\WebServiceProvider::class,` add: `Seat\Notes\NotesServiceProvider::class,`
+  * After `Seat\Web\WebServiceProvider::class,` add: `Seat\Notes\NotesServiceProvider::class,`
 * run `php artisan vendor:publish --force`
 * run `php artisan migrate` 
