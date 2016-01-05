@@ -1,4 +1,4 @@
-@extends('web::character.layouts.view', ['viewname' => 'edit'])
+@extends('web::character.layouts.view', ['viewname' => 'notes'])
 
 @section('title', trans_choice('notes::seat.edit_note',1) . " :: $note->title" )
 @section('page_header', trans_choice('notes::seat.edit_note',1))
