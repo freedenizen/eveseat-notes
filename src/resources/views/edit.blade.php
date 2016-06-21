@@ -31,6 +31,8 @@
                         <input type="checkbox" name="private" value="1" {{ $private }}>
                     </div>
 
+                    <input type="hidden" name="character_id" value="{{ $note->character_id }}">
+
                 </div><!-- /.box-body -->
 
                 <div class="box-footer">
