@@ -39,6 +39,7 @@ class UpdateNote extends Request
     {
 
         return [
+            'character_id'  => 'required',
             'title'   => 'required',
             'details' => 'required',
             'private' => 'boolean',
